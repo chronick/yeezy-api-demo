@@ -51,7 +51,7 @@ app.post(
   `/tts`,
   asyncMiddleware(async (req, res) => {
     const { shoeId, value } = req.body;
-    // if (!Array.every([ shoeId, value ])) return res.status(400).send('Invalid arguments')
+    if (!shoeId || !value) return res.status(400).send('Invalid arguments')
 
     const result = await createTTSEntry({ shoeId, value });
     res.status(201).json(result);

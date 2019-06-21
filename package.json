@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
+    "run-demo": "docker-compose up",
+    "reset-demo": "docker-compose rm -f db && docker-compose build",
     "test": "jest"
   },
   "dependencies": {
@@ -15,7 +16,6 @@
     "pg": "7.11.0"
   },
   "devDependencies": {
-    "jest": "23.6.0",
-    "nodemon": "1.19.1"
+    "jest": "23.6.0"
   }
 }

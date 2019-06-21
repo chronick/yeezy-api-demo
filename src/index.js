@@ -2,6 +2,7 @@ const express = require('express');
 const { getShoe, getShoes, createShoe, createTTSEntry } = require('./db');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const cors = require('cors');
 
 const { PORT = 8080 } = process.env;
 
@@ -15,8 +16,14 @@ const asyncMiddleware = fn => async (req, res, next) => {
   }
 };
 
-app.use(morgan('combined'));
 app.use(bodyParser.json());
+
+// basic logging good for production system
+app.use(morgan('combined'));
+
+// cors not strictly necessary if using API via cURL,
+// but useful if using a web-based client.
+app.use(cors());
 
 app.get(
   '/shoes',

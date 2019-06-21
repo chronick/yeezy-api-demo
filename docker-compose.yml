@@ -1,0 +1,16 @@
+version: '3'
+services:
+  api:
+    build: .
+    environment:
+      PORT: 80
+      DATABASE_URL: postgres://postgres:somesecretpassword@db:5432/postgres
+    ports:
+      - "3000:80"
+  db:
+    image: postgres:12-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=somesecretpassword
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/

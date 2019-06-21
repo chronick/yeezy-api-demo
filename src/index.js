@@ -47,7 +47,7 @@ app.post(
   '/shoes',
   asyncMiddleware(async (req, res) => {
     const { name } = req.body;
-    if (!name) return res.status(400).send('Must provide name');
+    if (!name) return res.status(400).json({ error: 'Must provide name' });
 
     const result = await createShoe({ name });
     res.status(201).json(result);
@@ -58,7 +58,7 @@ app.post(
   `/tts`,
   asyncMiddleware(async (req, res) => {
     const { shoeId, value } = req.body;
-    if (!shoeId || !value) return res.status(400).send('Invalid arguments')
+    if (!shoeId || !value) return res.status(400).json({ error: 'Invalid arguments' });
 
     const result = await createTTSEntry({ shoeId, value });
     res.status(201).json(result);
